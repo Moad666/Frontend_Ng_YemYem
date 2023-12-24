@@ -4,4 +4,5 @@ export class User {
   email : String | undefined;
   password : String | undefined;
   password_confirm : String | undefined;
+  date_joined : Date | undefined;
 }

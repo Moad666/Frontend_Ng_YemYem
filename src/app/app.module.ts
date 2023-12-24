@@ -15,6 +15,8 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { AccountComponent } from './account/account.component';
 import { ChangeDetectorRef } from '@angular/core';
+import { RecipesComponent } from './recipes/recipes.component';
+import { UsersComponent } from './users/users.component';
 
 
 
@@ -26,6 +28,8 @@ import { ChangeDetectorRef } from '@angular/core';
     AboutComponent,
     HomeComponent,
     AccountComponent,
+    RecipesComponent,
+    UsersComponent,
 
   ],
   imports: [

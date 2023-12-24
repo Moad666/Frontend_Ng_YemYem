@@ -51,6 +51,7 @@ export class LoginDialogComponent{
         }).then((result) => {
           if (result.isConfirmed) {
             this.dialogRef.close();
+            //this.router.navigate(["/account"]);
           }
         });
       },

@@ -7,7 +7,7 @@
          <a class="nav-link" routerLink = "" style="color: white;">Home</a>
       </li>
       <li class="nav-item">
-         <a class="nav-link" routerLink = "/about" style="color: white;">About</a>
+         <a class="nav-link" routerLink = "/about" style="color: white;">About Us</a>
       </li>
      </ul>
     <button class="btn btn-icon" (click)="openSignupDialog()">
@@ -15,24 +15,23 @@
     </button>
   </div>
 
+  <!-- Admin -->
   <div *ngIf="(loginService.authenticated$ | async) === true" class="d-flex justify-content-between w-100">
     <ng-container *ngIf="(loginService.isSuperUser$ | async) === true">
-      <!-- Display the navigation bar for superuser -->
       <ul class="nav mx-auto">
         <li class="nav-item active">
-          <a class="nav-link" routerLink="" style="color: white;">Home</a>
+          <a class="nav-link" routerLink="/users" style="color: white;">Users</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about" style="color: white;">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" style="color: white;">HHHHHHHHHHHHH</a>
+          <a class="nav-link" routerLink="/recipes" style="color: white;">Recipes</a>
         </li>
       </ul>
-      <button class="btn btn-icon" (click)="openSignupDialog()">
-        <i class="bi bi-person text-white"></i>
+      <button class="btn btn-icon rounded-circle ms-3" style="background-color: orange;" (click)="logout()">
+        <i class="bi bi-box-arrow-right text-white"></i>
       </button>
     </ng-container>
+
+    <!-- Simple user-->
     <ng-container *ngIf="(loginService.isSuperUser$ | async) === false" class="d-flex justify-content-between w-100">
       <ul class="nav mx-auto">
         <li class="nav-item active">
@@ -42,9 +41,13 @@
           <a class="nav-link" routerLink="/about" style="color: white;">About</a>
         </li>
       </ul>
-      <button class="btn btn-icon" (click)="openSignupDialog()">
+      <button class="btn btn-icon rounded-circle" style="background-color: orange;" (click)="goToAccount()">
         <i class="bi bi-person text-white"></i>
       </button>
+      <button class="btn btn-icon rounded-circle ms-3" style="background-color: orange;" (click)="logout()">
+        <i class="bi bi-box-arrow-right text-white"></i>
+      </button>
+
     </ng-container>
 
   </div>

@@ -5,6 +5,9 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { LoginService } from 'src/services/login.service';
 import { User } from 'src/models/user';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { AccountService } from 'src/services/account.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +17,16 @@ import { Observable } from 'rxjs';
 export class AppComponent{
   title = 'rc';
 
-  constructor(public dialog: MatDialog, public loginService : LoginService) {
+  constructor(public dialog: MatDialog, public loginService : LoginService, private router : Router,
+    private httpClient : HttpClient, accountService : AccountService) {
+  }
+
+  goToAccount(){
+    this.router.navigate(['/account']);
+  }
+  logout(){
+    this.loginService.logout();
+    this.router.navigate(['']);
   }
 
   openSignupDialog(): void {
@@ -26,4 +38,6 @@ export class AppComponent{
       // You can handle the result here if needed
     });
   }
+
+
 }

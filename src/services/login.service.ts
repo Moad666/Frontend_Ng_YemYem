@@ -29,7 +29,7 @@ export class LoginService {
       tap((response: any) => {
         console.log('Server response:', response);
 
-        const token = response.access; // Replace 'access_token' with the correct property name
+        const token = response.access; // token
 
         if (token) {
           localStorage.setItem('authToken', token);
@@ -48,7 +48,6 @@ export class LoginService {
   checkIfSuperuser(): Observable<boolean> {
     // Retrieve the token from storage
     const token = localStorage.getItem('authToken');
-
     // If token is not present, the user is not a superuser
     if (!token) {
       return of(false);
@@ -61,6 +60,11 @@ export class LoginService {
       catchError(() => of(false)),  // Handle HTTP errors by assuming the user is not a superuser
       map((response: any) => response?.is_superuser === true || false)
     );
+  }
+
+  logout(){
+    localStorage.removeItem('authToken');
+    this.authenticated$.next(false);
   }
 
 
