@@ -14,4 +14,11 @@ export class HomeService {
   getResipesList() : Observable<Recipe[]>{
     return this.httpClient.get<Recipe[]>(`${this.baseUrl}/list_recipe/`);
   }
+
+  searchRecipes(title: string): Observable<any[]> {
+    const params = { Title: title };
+    const url = `${this.baseUrl}/search/`;
+    const fullUrl = title ? `${url}?Title=${encodeURIComponent(title)}` : url;
+    return this.httpClient.get<any[]>(fullUrl, { params });
+  }
 }

@@ -48,7 +48,7 @@
               <td>{{recipe.Ingredients}}</td>
               <td>
                 <button (click) = "deleteRecipe(recipe.id)" class="btn btn-outline-danger">Delete</button>
-                <button class="btn btn-outline-secondary ms-2">Update</button>
+                <button (click) = "updateRecipe(recipe.id)" class="btn btn-outline-secondary ms-2">Update</button>
               </td>
             </tr>
           </tbody>

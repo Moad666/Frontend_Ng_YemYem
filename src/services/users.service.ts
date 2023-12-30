@@ -23,4 +23,13 @@ export class UsersService {
       return this.httpClient.delete(`${this.baseUrl}/users/${id}/`);
       }
 
+      updateUser(id:number|undefined, user : User): Observable<Object>{
+        return this.httpClient.put(`${this.baseUrl}/usersupdate/${id}/`,user);
+
+        }
+
+        getUserById(id : number |undefined): Observable<User>{
+          return this.httpClient.get<User>(`${this.baseUrl}/userbyid/${id}/`)
+          }
+
 }

@@ -17,6 +17,11 @@ import { AccountComponent } from './account/account.component';
 import { ChangeDetectorRef } from '@angular/core';
 import { RecipesComponent } from './recipes/recipes.component';
 import { UsersComponent } from './users/users.component';
+import { RecipesDialogComponent } from './recipes-dialog/recipes-dialog.component';
+import { UsersDialogComponent } from './users-dialog/users-dialog.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { ChangeDialogComponent } from './change-dialog/change-dialog.component';
 
 
 
@@ -30,6 +35,11 @@ import { UsersComponent } from './users/users.component';
     AccountComponent,
     RecipesComponent,
     UsersComponent,
+    RecipesDialogComponent,
+    UsersDialogComponent,
+    DashboardComponent,
+    RecipeDetailComponent,
+    ChangeDialogComponent,
 
   ],
   imports: [

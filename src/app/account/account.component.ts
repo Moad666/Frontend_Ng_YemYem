@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, map } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { EMPTY, Observable, map, switchMap, throwError } from 'rxjs';
 import { User } from 'src/models/user';
+import { AccountService } from 'src/services/account.service';
+import { ChangeDialogComponent } from '../change-dialog/change-dialog.component';
 
 @Component({
   selector: 'app-account',
@@ -11,7 +15,8 @@ import { User } from 'src/models/user';
 export class AccountComponent implements OnInit{
 
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private accountService : AccountService,
+    public dialog: MatDialog,private router : Router) { }
   userProfile: any;
   apiUrl = 'http://127.0.0.1:8000/api/user_profile/';
 
@@ -51,6 +56,16 @@ export class AccountComponent implements OnInit{
         console.error('Error fetching user profile:', error);
       }
     );
+  }
+
+  openChangeDialog(): void {
+    const dialogRef = this.dialog.open(ChangeDialogComponent, {
+      width: '900px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The signup dialog was closed');
+      // You can handle the result here if needed
+    });
   }
 
 

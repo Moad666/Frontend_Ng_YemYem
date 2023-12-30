@@ -51,7 +51,13 @@ export class LoginDialogComponent{
         }).then((result) => {
           if (result.isConfirmed) {
             this.dialogRef.close();
-            //this.router.navigate(["/account"]);
+            this.loginService.checkIfSuperuser().subscribe((isSuperuser) => {
+              if (isSuperuser) {
+                this.router.navigate(['/dashboard']);
+              } else {
+                this.router.navigate(['/account']);
+              }
+            });
           }
         });
       },

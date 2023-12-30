@@ -24,15 +24,18 @@ export class LoginService {
     this.authenticated$.next(true);
     return this.httpClient.post(`${this.baseUrl}`,user);
   }*/
+
   loginUser(user: User): Observable<any> {
     return this.httpClient.post(`${this.baseUrl}`, user).pipe(
       tap((response: any) => {
         console.log('Server response:', response);
 
         const token = response.access; // token
+        const refreshToken = response.refresh; // refresh
 
         if (token) {
           localStorage.setItem('authToken', token);
+          localStorage.setItem('refreshToken', refreshToken);
           this.authenticated$.next(true);
           this.isSuperUser$ = this.checkIfSuperuser(); // Update isSuperUser$ after authentication
         } else {
@@ -65,6 +68,21 @@ export class LoginService {
   logout(){
     localStorage.removeItem('authToken');
     this.authenticated$.next(false);
+  }
+
+
+
+
+  // get informations of user authenticated
+  getAuthenticatedUser(): Observable<User | undefined> {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      return of(undefined);
+    }
+    const headers = { Authorization: `Bearer ${token}` };
+
+    // Assuming your backend has an endpoint to get user information
+    return this.httpClient.get<User>('http://127.0.0.1:8000/api/get_authenticated_user/', { headers });
   }
 
 

@@ -5,4 +5,6 @@ export class User {
   password : String | undefined;
   password_confirm : String | undefined;
   date_joined : Date | undefined;
+  oldPassword !: string;
+  newPassword !: string;
 }

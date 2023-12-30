@@ -20,6 +20,9 @@
     <ng-container *ngIf="(loginService.isSuperUser$ | async) === true">
       <ul class="nav mx-auto">
         <li class="nav-item active">
+          <a class="nav-link" routerLink="/dashboard" style="color: white;">Dashboard</a>
+        </li>
+        <li class="nav-item active">
           <a class="nav-link" routerLink="/users" style="color: white;">Users</a>
         </li>
         <li class="nav-item">

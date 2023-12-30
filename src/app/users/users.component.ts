@@ -31,26 +31,72 @@ export class UsersComponent implements OnInit{
     this.createUser();
   }
 
-  createUser(){
-    this.userService.createUser(this.user).subscribe(data=>{
-      console.log(data);
+  createUser() {
+    // Check if passwords match
+    if (this.user.password !== this.user.password_confirm) {
       Swal.fire({
-        icon: 'success',
-        title: 'User Created Successfully!',
+        icon: 'error',
+        title: 'Error',
+        text: 'Passwords do not match.',
         showConfirmButton: true,
         confirmButtonText: 'OK'
-      }).then((result)=>{
-        if (result.isConfirmed) {
-          window.location.reload();
-        }
       });
-    });
+      return; // Exit the method if passwords do not match
+    }
+
+    // Continue with user creation API call
+    this.userService.createUser(this.user).subscribe(
+      (data) => {
+        console.log(data);
+        Swal.fire({
+          icon: 'success',
+          title: 'User Created Successfully!',
+          showConfirmButton: true,
+          confirmButtonText: 'OK'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      },
+      (error) => {
+        console.error('Error creating user:', error);
+
+        let errorMessage = 'An error occurred while creating the user.';
+        if (error && error.error && error.error.detail) {
+          errorMessage = error.error.detail;
+        }
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorMessage,
+          showConfirmButton: true,
+          confirmButtonText: 'OK'
+        });
       }
+    );
+  }
+
+
 
       deleteUser(id : number|undefined){
         this.userService.deleteUser(id).subscribe(data =>{
           console.log(data);
-          window.location.reload();
+          Swal.fire({
+            icon: 'error',
+            title: 'User deleted Successfully!',
+            showConfirmButton: true,
+            confirmButtonText: 'OK'
+          }).then((result)=>{
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
+          });
         });
       }
+
+      updateUser(id : number | undefined){
+        this.router.navigate(['usersDialog', id]);
+          }
 }

@@ -19,11 +19,18 @@ export class AppComponent{
 
   constructor(public dialog: MatDialog, public loginService : LoginService, private router : Router,
     private httpClient : HttpClient, accountService : AccountService) {
+      this.loginService.isSuperUser$ = this.loginService.checkIfSuperuser();
+
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      this.loginService.authenticated$.next(true);
+    }
   }
 
   goToAccount(){
     this.router.navigate(['/account']);
   }
+
   logout(){
     this.loginService.logout();
     this.router.navigate(['']);
@@ -38,6 +45,5 @@ export class AppComponent{
       // You can handle the result here if needed
     });
   }
-
 
 }
